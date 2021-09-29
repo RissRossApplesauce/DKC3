@@ -1,3 +1,6 @@
+# Rules and Practice Questions
+https://www.digikey.com/en/resources/edu/dkc3-computing-competition
+
 # Files
 Template.py is the base template we will be using in the competition, so make a copy and don't edit the original if you are working on something. Copytemplate.py will duplicate template.py so we can quickly make copies during the competition.
 
