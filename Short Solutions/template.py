@@ -22,7 +22,7 @@ sols = list()
 for case in split(open(n + 'In.txt').read()):
     try:
         temp = solve(parse(case))
-        sol = (format(temp), fail)[temp == None]
+        sol = format(temp) if temp else fail
     except:
         print('Err on ' + str(case))
         print(traceback.format_exc())
@@ -30,4 +30,4 @@ for case in split(open(n + 'In.txt').read()):
     else:
         print(sol)
     sols.append(sol)
-open(n + 'Out.txt', 'w').write(join(sols))
+    open(n + 'Out.txt', 'w').write(join(sols))

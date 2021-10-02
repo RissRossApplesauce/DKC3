@@ -1,6 +1,6 @@
 import traceback, functools, itertools, cmath, math, collections, re, operator
 
-n = 'NAME'
+n = './2017\Molkky'
 fail = ''
 
 def split(x):

@@ -1,0 +1,2 @@
+D0: Position after 1 steps is (0,1) and ends at (0,1) with 1 steps.
+D10: Position after 892 steps is (24,-10) and ends at (32,0) with 1024 steps.
