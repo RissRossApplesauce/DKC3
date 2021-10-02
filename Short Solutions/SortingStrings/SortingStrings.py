@@ -1,5 +1,6 @@
 import traceback, functools, itertools, cmath, math, collections, re, operator
 
+# 2020 question 9
 n = '.\SortingStrings\SortingStrings'
 fail = ''
 
@@ -9,6 +10,7 @@ def split(x):
 def parse(x):
     return x.strip('\n*')
     
+# very nasty comparison function to determine which char (a or b) goes first
 def mycmp(a, b):
     aa = a.isalpha()
     ba = a.isalpha()
@@ -28,6 +30,7 @@ def mycmp(a, b):
 
 
 def solve(x):
+    # sort the list with mycmp as the key
     return sorted(list(x), key = functools.cmp_to_key(mycmp))
 
 def format(x):

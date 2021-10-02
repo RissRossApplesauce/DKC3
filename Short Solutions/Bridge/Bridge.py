@@ -1,6 +1,7 @@
 import traceback, functools, itertools, cmath, math, collections, re, operator
 
-n = 'Spiral/Spiral'
+# 2016 question 6
+n = 'Bridge/Bridge'
 fail = ''
 
 def split(x):
@@ -10,17 +11,22 @@ def parse(x):
     return int(x)
 
 def solve(x):
-    size = x//2
-    if x / 2 == size:
-        pass # not solved for even input
-    else:
-        r = 1
-        l = 1
-        for s in range(size):
-            i = 2 * (s + 1)
-            r += 4 * l + 10 * i
-            l += 4 * i
-        return r
+    count = 0
+    best = 0
+    # loop until no more bits in x are set to 1
+    while x != 0:
+        # use & bitwise operator to check what the rightmost bit is. if it's a 1, increase the count
+        if x & 1:
+            count += 1
+        # if it's a 0, reset the count to 0
+        else:
+            count = 0
+        # if the count is better than any previously found count, store it
+        if count > best:
+            best = count
+        # bit shift right one
+        x >>= 1
+    return best
 
 def format(x):
     return str(x)

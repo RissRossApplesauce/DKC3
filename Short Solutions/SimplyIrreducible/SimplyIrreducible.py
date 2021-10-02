@@ -7,7 +7,8 @@ import collections
 import re
 import operator
 
-path = 'D:/'
+# 2020 question 5
+path = 'SimplyIrreducible/'
 name = 'SimplyIrreducible'
 failed_solution = ''
 
@@ -19,8 +20,12 @@ def parse(case):
 
 def solve(case):
     fracs = list()
+    # range from 1 to 99 (100 is not included with range)
+    # this way we can check all 2 digit numerators and all 2 digit denominators
     for x in range(1, 100):
         for y in range(1, 100):
+            # check if x/y fits the rules given in the question, if so add it to the list
+            # make sure we havent already found the same value before (count == 0)
             if (x / y) < case and fracs.count(x / y) == 0:
                 fracs.append(x / y)
     return sum(fracs)

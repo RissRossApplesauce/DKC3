@@ -1,5 +1,6 @@
 import traceback, functools, itertools, cmath, math, collections, re, operator
 
+# 2020 question 10
 n = '.\Concrete\Concrete'
 fail = ''
 
@@ -7,11 +8,14 @@ def split(x):
     return x.split('\n')
 
 def parse(x):
+    # convert to list of ints
     x = x.split(', ')
     x = list(map(lambda a: int(a), x))
     return x
 
 def solve(x):
+    # pretty much just applying the formulas as they said to
+    # we initially forgot the ceil (round up to nearest int) and floor (round down to nearest int)
     weight, width = x
     w = math.ceil(weight / width * 1.75)
     d = math.floor(weight/w + width/2)

@@ -7,7 +7,8 @@ import collections
 import re
 import operator
 
-path = 'D:/'
+# 2020 question 4
+path = 'GeorgeGrammar/'
 name = 'GeorgeGrammar'
 failed_solution = ''
 
@@ -15,14 +16,18 @@ def separate(input):
     return input.splitlines()
     
 def parse(case):
+    # dont need to change the string to anything else
     return case
 
 def solve(case):
+    # strip non-alphabetical characters from case and put result in letters
     letters = [x for x in case if x.isalpha()]
-    letters.sort()
-    for i in range(len(case)):
+    letters.sort() # sort the letters
+    # loop through case. every time a non-alphabetical character is found, insert it where it belongs in letters
+    for i in range(len(case)): 
         if not case[i].isalpha():
             letters.insert(i, case[i])
+    # return both the input and the output. at this point letters is a list of chars, so it must be converted to a string with join
     return (case, ''.join(letters))
 
 

@@ -7,7 +7,8 @@ import collections
 import re
 import operator
 
-path = 'D:/'
+# 2020 question 7
+path = 'ComboLogic/'
 name = 'ComboLogic'
 failed_solution = ''
 
@@ -15,15 +16,18 @@ def separate(input):
     return input.split('\n')
     
 def parse(case):
+    # convert case into a list of ints
     return list(map(lambda x: int(x), case.split(' ')))
 
 def solve(case):
+    # do math for both parts of the question. convert b to int because the question wants 0 or 1, not 'true' or 'false'
     b = int((not case[0] and case[1]) or (case[2] and case[3]) or (case[4] and not case[5]))
     f = (not case[0]) + case[2] + case[4] + (case[1] + case[3] + (not case[5])) / 10
     return b, f
 
 def format(case):
     b, f = case
+    # use formatted string to convert to a string and truncate to one decimal place
     return f'{b} - {f:.1f}'
 
 def join(cases):
