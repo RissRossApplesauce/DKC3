@@ -14,7 +14,7 @@ def join(x):
 
 sols = list()
 for case in split(open(n + 'In.txt').read()):
-    try: temp = solve(case)
+    try: sol = solve(case)
     except:
         print(str(case))
         print(traceback.format_exc())
