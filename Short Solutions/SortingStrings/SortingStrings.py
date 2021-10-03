@@ -10,6 +10,7 @@ def split(x):
 def parse(x):
     return x.strip('\n*')
     
+# better solution in notes.py
 # very nasty comparison function to determine which char (a or b) goes first
 def mycmp(a, b):
     aa = a.isalpha()
@@ -27,7 +28,6 @@ def mycmp(a, b):
             if au > bu: return -1
             if au < bu: return 1
             else: return 0
-
 
 def solve(x):
     # sort the list with mycmp as the key

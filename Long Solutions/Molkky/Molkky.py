@@ -1,7 +1,7 @@
 import traceback, functools, itertools, cmath, math, collections, re, operator
 
 # took 1:10:00
-n = './2017\Molkky'
+n = './Molkky\Molkky'
 fail = ''
 
 games = 0
@@ -69,7 +69,8 @@ def solve(x):
             
     return winner, players
 
-# research a better way to make sort comparisons
+# better solution in notes.py
+# sort by loser last, then by points scored
 def mycmp(a, b):
     if a[3] and b[3]:
         if a[1] == b[1]: return 0
