@@ -23,15 +23,11 @@ for x in range(xlen):
 
 
 
-
-
-
 # comparison function with multiple conditions
 # make helpers for each rule
 
 # generic helper that just applies greater than/less than
-def order(a, b):
-    return -1 if a < b else a > b
+def order(a, b): return -1 if a < b else a > b
 
 # default char comparison puts numbers first, so this might be useful
 # if we have a function that checks for a condition, put a - sign to make that condition come FIRST. no - sign will make it go LAST
@@ -59,6 +55,63 @@ def compare(a, b):
 
 
 
+
+# quick local classes to organize things easily. replaces arrays of data in cases where they are used frequently
+class person: pass
+# you dont need to define anything inside the class, just give it a name
+ross = person()
+ross.name = 'Ross'
+ross.age = 21
+keegan = person()
+keegan.name = 'Keegan'
+
+# instance variables can still be compared
+if ross.name == keegan.name: print("same name")
+
+# this will crash because keegan.age is undefined
+# this problem should be easy to avoid, just fully define everyones variables from the start
+# if ross.age > keegan.age: print("older")
+
+
+
+
+
+
+# finding the best path
+# depth first search with some rules
+def solve(x):
+    bestpath = []
+    
+    # generate possible next moves given the path so far
+    def posmoves(path):
+        pass
+
+    # determine if path is better than bestpath. assumes isdone(path) == True
+    # this example says a shorter path is better, however, if bestpath is empty, anything is better
+    def isbest(path):
+        return len(path) < len(bestpath) if bestpath else True
+
+    # path has reached its goal (such as getting to the target city)
+    def isdone(path):
+        pass
+
+    # path has failed (can't possibly replace bestpath)
+    def isfailed(path):
+        pass
+
+    def findpath(path):
+        for move in posmoves(path):
+            newpath = path.copy()
+            newpath.append(move)
+            if isfailed(newpath): return
+            elif isdone(newpath):
+                if isbest(newpath):
+                    nonlocal bestpath
+                    bestpath = newpath
+            else:
+                findpath(newpath)
+
+    findpath('[path start location]')
 
 
 
