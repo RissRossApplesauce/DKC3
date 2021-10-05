@@ -1,6 +1,5 @@
 # create multi-dimensional array. use nested list comprehension for more dimensions
 # note that the cols and rows are used in reverse order when creating the array. this makes it so indexing is in forward order, aka a[col][row]
-from Word.Word import join
 
 
 cols = 5
@@ -99,6 +98,7 @@ def solve(x):
         pass
 
     # path has failed (can't possibly replace bestpath)
+    # dont need to check for dead ends
     def isfailed(path):
         pass
 
@@ -107,7 +107,8 @@ def solve(x):
             newpath = path.copy()
             newpath.append(move)
             if isfailed(newpath): return
-            elif isdone(newpath):
+            elif isdone(newpath): # what if the best path comes farther along this path?
+                # to correct this, this code path must recurse and isfailed becomes necessary
                 if isbest(newpath):
                     nonlocal bestpath
                     bestpath = newpath
@@ -116,26 +117,26 @@ def solve(x):
 
     # non-recursive findpath
     def newfindpath(path):
+        nonlocal bestpath
         stack = [(path, posmoves(path))]
         while stack:
+            newpath = stack[-1][0]
             moves = stack[-1][1]
-            if moves:
-                nextmove = moves.pop(0)
-                
-            else:
+            if isfailed(newpath):
                 stack.pop(-1)
-            for move in stack[-1][1]:
-                newpath = stack[-1][0].copy()
-                newpath.append(move)
-                if isfailed(newpath): return
-                elif isdone(newpath):
-                    if isbest(newpath):
-                        nonlocal bestpath
-                        bestpath = newpath
-                else:
-                    findpath(newpath)
-
-
+                continue
+            # the isfailed check may not always be necessary if isdone has pop and continue uncommented
+            if isdone(newpath):
+                if isbest(newpath): bestpath = newpath 
+                # stack.pop(-1)
+                # continue
+                # only uncomment above 2 lines if a better path cant be an extension of the current bestpath
+            if not moves:
+                stack.pop(-1)
+            else:
+                nextpath = newpath.copy()
+                nextpath.append(moves.pop(0))
+                stack.append((nextpath, posmoves(nextpath)))
 
     findpath('[path start location]')
 

@@ -44,6 +44,9 @@ def solve(x):
 
     def minblood(a, b):
         return compare(pathblood(a), pathblood(b))
+        
+    def earlier(a, b):
+        return compare(a[2] + a[3], b[2] + b[3])
 
     def lesshours(a, b):
         hoursa = hoursb = 0
@@ -58,7 +61,7 @@ def solve(x):
 
     def isbest(path):
         if not bestpath: return True
-        for comp in [minblood, lesshours, shortest]:
+        for comp in [minblood, earlier, lesshours, shortest]:
             r = comp(path, bestpath)
             if r == -1: return True
             if r == 1: return False
