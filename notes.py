@@ -1,5 +1,8 @@
 # create multi-dimensional array. use nested list comprehension for more dimensions
 # note that the cols and rows are used in reverse order when creating the array. this makes it so indexing is in forward order, aka a[col][row]
+from Word.Word import join
+
+
 cols = 5
 rows = 3
 a = [[0] * rows for _ in range(cols)]
@@ -110,6 +113,29 @@ def solve(x):
                     bestpath = newpath
             else:
                 findpath(newpath)
+
+    # non-recursive findpath
+    def newfindpath(path):
+        stack = [(path, posmoves(path))]
+        while stack:
+            moves = stack[-1][1]
+            if moves:
+                nextmove = moves.pop(0)
+                
+            else:
+                stack.pop(-1)
+            for move in stack[-1][1]:
+                newpath = stack[-1][0].copy()
+                newpath.append(move)
+                if isfailed(newpath): return
+                elif isdone(newpath):
+                    if isbest(newpath):
+                        nonlocal bestpath
+                        bestpath = newpath
+                else:
+                    findpath(newpath)
+
+
 
     findpath('[path start location]')
 
