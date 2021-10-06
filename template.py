@@ -1,4 +1,4 @@
-import functools as ft, itertools as it, operator as op, cmath, math, collections, re, traceback
+import functools as ft, itertools as it, operator as op, cmath, math, collections, re, traceback, copy
 
 n = 'NAME'
 fail = ''

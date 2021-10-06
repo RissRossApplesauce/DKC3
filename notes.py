@@ -1,3 +1,4 @@
+import copy
 # create multi-dimensional array. use nested list comprehension for more dimensions
 # note that the cols and rows are used in reverse order when creating the array. this makes it so indexing is in forward order, aka a[col][row]
 
@@ -78,65 +79,88 @@ if ross.name == keegan.name: print("same name")
 
 
 
+"""
+Shallow vs Deep copies
+Python lists use pointers
+If you use the = operator, youre just copying a pointer, not the data
+If you use = <list name>.copy(), you get a copy of the data
+This is called a shallow copy because it only copies data 1 layer in
+Shallow copies are usually sufficient
+If the original list had lists inside it, youre just making copies of the pointers to those lists
+A deep copy recursively copies everything and has no pointers to the original
+"""
+
+# Shallow copy anything:
+my_shallow_copy = copy.copy(a)
+
+# Shallow copy a list:
+my_shallow_copy = a.copy()
+
+# Deep copy anything:
+my_deep_copy = copy.deepcopy(a)
+
+
+
+
 
 # finding the best path
 # depth first search with some rules
 def solve(x):
     bestpath = []
     
-    # generate possible next moves given the path so far
+    # generate all possible next moves for path
     def posmoves(path):
         pass
 
-    # determine if path is better than bestpath. assumes isdone(path) == True
-    # this example says a shorter path is better, however, if bestpath is empty, anything is better
+    # check if path is better than bestpath. assumes the path already passes isdone()
     def isbest(path):
-        return len(path) < len(bestpath) if bestpath else True
+        if not bestpath: return True # any path is better than an empty path
+        pass
 
-    # path has reached its goal (such as getting to the target city)
+    # check if a path has reached its goal
     def isdone(path):
         pass
 
-    # path has failed (can't possibly replace bestpath)
-    # dont need to check for dead ends
+    # checks if a path has failed (it's no longer able to produce a solution)
+    # *** dont need to check for dead ends
     def isfailed(path):
         pass
 
-    def findpath(path):
-        for move in posmoves(path):
-            newpath = path.copy()
-            newpath.append(move)
-            if isfailed(newpath): return
-            elif isdone(newpath): # what if the best path comes farther along this path?
-                # to correct this, this code path must recurse and isfailed becomes necessary
-                if isbest(newpath):
-                    nonlocal bestpath
-                    bestpath = newpath
-            else:
-                findpath(newpath)
+    # recursive findpath (with a bug in comments)
+    # def findpath(path):
+    #     for move in posmoves(path):
+    #         newpath = path.copy()
+    #         newpath.append(move)
+    #         if isfailed(newpath): return
+    #         elif isdone(newpath): # what if another solution comes farther along this path?
+    #             # to allow for this, this code path must recurse and isfailed becomes necessary to use
+    #             if isbest(newpath):
+    #                 nonlocal bestpath
+    #                 bestpath = newpath
+    #         else:
+    #             findpath(newpath)
 
     # non-recursive findpath
-    def newfindpath(path):
+    def findpath(path):
         nonlocal bestpath
         stack = [(path, posmoves(path))]
         while stack:
-            newpath = stack[-1][0]
+            newpath = stack[-1][0].copy()
             moves = stack[-1][1]
             if isfailed(newpath):
-                stack.pop(-1)
+                stack.pop()
                 continue
-            # the isfailed check may not always be necessary if isdone has pop and continue uncommented
             if isdone(newpath):
-                if isbest(newpath): bestpath = newpath 
-                # stack.pop(-1)
-                # continue
-                # only uncomment above 2 lines if a better path cant be an extension of the current bestpath
+                if isbest(newpath):
+                    bestpath = newpath.copy() 
+                    # only uncomment when a better path cant be found 'downstream' of this solution
+                    # stack.pop()
+                    # continue
             if not moves:
-                stack.pop(-1)
+                stack.pop()
             else:
-                nextpath = newpath.copy()
-                nextpath.append(moves.pop(0))
-                stack.append((nextpath, posmoves(nextpath)))
+                newpath.append(moves.pop())
+                stack.append((newpath, posmoves(newpath)))
 
     findpath('[path start location]')
 
