@@ -1,0 +1,3 @@
+streak(7)=3
+streak(1115)=2
+streak(13)=4
