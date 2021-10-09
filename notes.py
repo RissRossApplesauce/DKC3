@@ -25,6 +25,20 @@ for x in range(xlen):
 
 
 
+# get cases from x when cases are determined by a number rather than a separation character
+x : str
+x = x.splitlines()
+res = list()
+while x:
+    # extract the number of lines from the input
+    nlines = int(x[0])
+    # append the case to res
+    res.append(x[1:nlines + 1])
+    # remove the case from x
+    x = x[nlines + 1:]
+    
+
+
 
 # comparison function with multiple conditions
 # make helpers for each rule
@@ -143,24 +157,26 @@ def solve(x):
     # non-recursive findpath
     def findpath(path):
         nonlocal bestpath
-        stack = [(path, posmoves(path))]
+        stack = [(path, posmoves(path), True)]
         while stack:
             newpath = stack[-1][0].copy()
             moves = stack[-1][1]
-            if isfailed(newpath):
-                stack.pop()
-                continue
-            if isdone(newpath):
-                if isbest(newpath):
-                    bestpath = newpath.copy() 
-                    # only uncomment when a better path cant be found 'downstream' of this solution
-                    # stack.pop()
-                    # continue
+            if stack[-1][2]: # only evaluate path the first time
+                if isfailed(newpath):
+                    stack.pop()
+                    continue
+                if isdone(newpath):
+                    if isbest(newpath):
+                        bestpath = newpath.copy() 
+                        # only uncomment when a better path cant be found 'downstream' of this solution
+                        # stack.pop()
+                        # continue
+                stack[-1][2] = False
             if not moves:
                 stack.pop()
             else:
                 newpath.append(moves.pop())
-                stack.append((newpath, posmoves(newpath)))
+                stack.append((newpath, posmoves(newpath), True))
 
     findpath('[path start location]')
 
