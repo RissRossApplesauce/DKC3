@@ -140,21 +140,21 @@ def solve(x):
     def isfailed(path):
         pass
 
-    # recursive findpath (with a bug in comments)
-    # def findpath(path):
-    #     for move in posmoves(path):
-    #         newpath = path.copy()
-    #         newpath.append(move)
-    #         if isfailed(newpath): return
-    #         elif isdone(newpath): # what if another solution comes farther along this path?
-    #             # to allow for this, this code path must recurse and isfailed becomes necessary to use
-    #             if isbest(newpath):
-    #                 nonlocal bestpath
-    #                 bestpath = newpath
-    #         else:
-    #             findpath(newpath)
+    # recursive findpath
+    def findpath(path):
+        nonlocal bestpath
+        for move in posmoves(path):
+            newpath = path.copy()
+            newpath.append(move)
+            if isfailed(newpath): return
+            elif isdone(newpath):
+                if isbest(newpath):
+                    bestpath = newpath
+                findpath(newpath) # comment this when you don't want to recurse if the path is already done
+            else:
+                findpath(newpath)
 
-    # non-recursive findpath
+    # non-recursive findpath for very long paths
     def findpath(path):
         nonlocal bestpath
         stack = [(path, posmoves(path), True)]
@@ -168,9 +168,9 @@ def solve(x):
                 if isdone(newpath):
                     if isbest(newpath):
                         bestpath = newpath.copy() 
-                        # only uncomment when a better path cant be found 'downstream' of this solution
-                        # stack.pop()
-                        # continue
+                    # comment the next 2 lines when you don't want to keep going if the path is already done
+                    stack.pop()
+                    continue
                 stack[-1][2] = False
             if not moves:
                 stack.pop()
@@ -178,7 +178,7 @@ def solve(x):
                 newpath.append(moves.pop())
                 stack.append((newpath, posmoves(newpath), True))
 
-    findpath('[path start location]')
+    # findpath([path start location])
 
 
 
