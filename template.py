@@ -7,14 +7,16 @@ def split(x):
     return x.strip('\n').split('\n')
 
 def solve(x):
-    return x
+    pass
 
 def join(x):
-    return '\n'.join(x)
+    return '\n'.join(str(x))
 
 sols = list()
 for case in split(open(n + 'In.txt').read()):
-    try: sol = solve(case)
+    try:
+        sol = solve(case)
+        if not isinstance(sol, str): sol = fail
     except:
         print(str(case[:100]))
         print(traceback.format_exc())
