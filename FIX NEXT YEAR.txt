@@ -1,0 +1,4 @@
+Non-recursive path finding didn't work
+Figure out why pathfinding got stuck on pokemon go go problem. It shouldve ran longer than others, but not 2 minutes
+Join has problems with x not being a string. figure out the best solution (there is already one in the template)
+Try out multiprocessing in the template
