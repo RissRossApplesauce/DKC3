@@ -74,6 +74,7 @@ def compare(a, b):
 
 
 # quick local classes to organize things easily. replaces arrays of data in cases where they are used frequently
+# this is bad practice in normal python programming, but it might be useful for DKC3
 class person: pass
 # you dont need to define anything inside the class, just give it a name
 ross = person()
