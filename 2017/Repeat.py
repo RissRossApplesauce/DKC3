@@ -8,7 +8,26 @@ def splitcases(x):
     return x.strip('\n').split('\n')
     
 def solve(x, n):
-    pass
+    results=[]
+    
+    while True:
+        results.append(x)
+        numlist = list(x)
+        numlist = [*map(int,numlist)]
+        small = sorted(numlist)
+        big = small[::-1]
+        small = [*map(str,small)]
+        big = [*map(str,big)]
+        small = int("".join(small))
+        big = int("".join(big))
+        newx= big-small
+        if (newx==int(x)):
+            break
+        else:
+            x=str(newx)
+    return " ".join(results)
+    
+
 
 for num, case in enumerate(splitcases(open(fin).read())):
     print(f'Case {num + 1}:')

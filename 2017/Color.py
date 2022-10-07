@@ -5,9 +5,11 @@ fout = './Short Programming\ColorOut.txt'
 open(fout, 'w').close()
 
 def splitcases(x):
-    return x.strip('\n').split('\n')
+    return x.strip('\n\n').split('\n\n')
     
 def solve(x, n):
+    grid = x.split('\n')
+    grid = [*map(lambda s: s.split(' '), grid)]
     pass
 
 for num, case in enumerate(splitcases(open(fin).read())):

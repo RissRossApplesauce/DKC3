@@ -1,0 +1,2 @@
+Budget #1: Maximum of 2000 lives saved.
+Budget #2: Maximum of 0 lives saved.

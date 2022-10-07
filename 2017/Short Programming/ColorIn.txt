@@ -1,0 +1,8 @@
+Red White Blue
+Blue White Red
+White Red Blue
+
+Red Red Red Red
+Blue White Red Red
+Red Red Red Red
+Red Red Red Red

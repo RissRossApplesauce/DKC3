@@ -8,7 +8,20 @@ def splitcases(x):
     return x.strip('\n').split('\n')
     
 def solve(x, n):
-    pass
+    x = int(x)
+
+    diagonal = [*range(x - 1)]
+    diagonal += diagonal[-2::-1] + [0]
+    
+    sum = 0
+    i = 0
+    for diag in diagonal:
+        sum += (2 * i) + 1
+        i += diag + 2
+    
+    return sum
+        
+
 
 for num, case in enumerate(splitcases(open(fin).read())):
     print(f'Case {num + 1}:')
