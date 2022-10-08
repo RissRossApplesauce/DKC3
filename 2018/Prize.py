@@ -8,6 +8,42 @@ def splitcases(x):
     return x.strip('\n').split('\n')
     
 def solve(x, n):
+    x = int(x)
+
+    def good(s):
+        last = ''
+        lcount = 0
+        for c in s:
+            if c == last and c == 'A':
+                return False
+            last = c
+            if c == 'L':
+                lcount += 1
+                if lcount > 1:
+                    return False
+        return True
+
+    combinations = list(it.product('ALO', repeat=x))
+    count = len(combinations)
+    combinations = list(filter(good, combinations))
+
+    l = []
+    while combinations:
+        if len(combinations )< 5:
+            l.append(combinations)
+            break
+        else:
+            l.append(combinations[:5])
+            combinations = combinations[5:]
+    
+    l = ',\n'.join([
+            ', '.join([
+                ''.join(word) for word in line
+            ])
+            for line in l
+        ])
+    return f'{count}\n{l}\n*'
+
     pass
 
 for num, case in enumerate(splitcases(open(fin).read())):

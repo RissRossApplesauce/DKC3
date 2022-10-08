@@ -7,8 +7,23 @@ open(fout, 'w').close()
 def splitcases(x):
     return x.strip('\n').split('\n')
     
+rows = [
+    '1234567890-=',
+    'qwertyuiop[]\\'.upper(),
+    'asdfghjkl;\''.upper(),
+    'zxcvbnm,./'.upper(),
+]
 def solve(x, n):
-    pass
+    result = ''
+    for c in x:
+        if c == ' ':
+            result += c
+        else:
+            for row in rows:
+                if c in row:
+                    result += row[row.index(c) - 1]
+                    break
+    return result
 
 for num, case in enumerate(splitcases(open(fin).read())):
     print(f'Case {num + 1}:')

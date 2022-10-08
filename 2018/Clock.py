@@ -8,7 +8,13 @@ def splitcases(x):
     return x.strip('\n').split('\n')
     
 def solve(x, n):
-    pass
+    h, m = x.split(':')
+    mratio = int(m) / 60
+    hratio = (int(h) + (mratio)) / 12
+    ratio = abs(mratio - hratio)
+    if ratio == 1:
+        ratio = 0
+    return f'{ratio * 360:.3f}'
 
 for num, case in enumerate(splitcases(open(fin).read())):
     print(f'Case {num + 1}:')
