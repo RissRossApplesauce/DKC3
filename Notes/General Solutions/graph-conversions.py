@@ -3,7 +3,7 @@ There are multiple ways to represent a graph, and the competition tends to use a
 These are helper functions that convert from one representation to another.
 """
 
-def edges2matrix(edges):
+def edges2matrix(edges, directed = False):
     # find all of the vertices that the edges connect to
     # store them in a dictionary and assign each one an index. the indices will be used to create the matrix
     names = {}
@@ -25,14 +25,12 @@ def edges2matrix(edges):
         i1 = names[edge[1]]
         weight = edge[2]
         matrix[i0][i1] = weight
-        # only do the following line if the graph is UNDIRECTED, meaning there are no one-way edges
-        matrix[i1][i0] = weight
+        if not directed:
+            matrix[i1][i0] = weight
     
     return matrix, names
 
 def matrix2edges(matrix, names = {}):
-    edges = set()
-    
     V = len(matrix)
     
     if names:
@@ -40,14 +38,15 @@ def matrix2edges(matrix, names = {}):
         for key, value in names.items():
             name_lookup[value] = key
             
+    edges = set()
     for start in range(V):
         for end in range(V):
-            if matrix[start][end] != 0:
+            if matrix[start][end] != 0: # 0 represents an unavailable path. change this if necessary
                 if names:
                     edges.add((name_lookup[start], name_lookup[end], matrix[start][end]))
                 else:
                     edges.add(start, end, matrix[start][end])
-            if matrix[end][start] != 0:
+            if matrix[end][start] != 0: # 0 represents an unavailable path. change this if necessary
                 if names:
                     edges.add((name_lookup[end], name_lookup[start], matrix[end][start]))
                 else:
@@ -83,7 +82,22 @@ def points2edges(points, names = {}):
     return edges
 
 def points2matrix(points, names = {}):
-    return edges2matrix(points2edges(points, names))
+    def dist(a, b):
+        x = a[0] - b[0]
+        y = a[1] - b[1]
+        return (x ** 2 + y ** 2) ** 0.5 # 'as the bird flies' distance (you can go in a straight path from a to b)
+        return abs(x) + abs(y) # 'city block' distance (you can only travel north/east/south/west, no diagonal)
+    
+    V = len(points)
+    matrix = [[0 for _ in range(V)] for _ in range(V)]
+    
+    # assumes you can travel from any point to any other point
+    for i1 in range(V):
+        for i2 in range(V):
+            d = dist(points[i1], points[i2]) if i1 != i2 else 0
+            matrix[i1][i2] = matrix[i2][i1] = d
+    
+    return matrix, names
 
 # example of edge representation
 # each entry represents the edge connecting between vertexes, along with the 'weight' or distance of the edge
