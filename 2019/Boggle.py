@@ -6,7 +6,16 @@ open(fout, 'w').close()
 
 def splitcases(x):
     return x.strip('\n\n').split('\n\n')
-    
+
+def notoob(x, y):
+    return not any([
+        x < 0,
+        x >= 4,
+        y < 0,
+        y >= 4,
+    ])
+
+
 def ingrid(word, grid):
     w = list(word)
 
@@ -28,14 +37,6 @@ def ingrid(word, grid):
         (1, 1),
     ]
 
-    def notoob(x, y):
-        return not any([
-            x < 0,
-            x >= 4,
-            y < 0,
-            y >= 4,
-        ])
-
     def wordfrom(remaining, x, y, taken):
         if len(remaining) == 0:
             return True
@@ -51,6 +52,17 @@ def ingrid(word, grid):
                 return True
         
         return False
+
+    # make sure that every letter in the word actually exists in the grid
+    # this is to deal with adversary input that makes it take a very long time to search
+    for letter in word:
+        found = False
+        for row in grid:
+            if letter in row:
+                found = True
+                break
+        if not found:
+            return False
 
     for x in range(4):
         for y in range(4):
