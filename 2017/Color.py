@@ -11,7 +11,7 @@ def solve(x, n):
     grid = x.split('\n')
     grid = [*map(lambda s: s.split(' '), grid)]
 
-    def solved(grid):
+    def accept(grid):
         color = None
         for row in grid:
             for entry in row:
@@ -21,7 +21,7 @@ def solve(x, n):
                     return False
         return True
 
-    def movesfrom(grid):
+    def options(grid):
         results = []
         direction = [
             (0, 1),
@@ -39,7 +39,7 @@ def solve(x, n):
                     if 0 <= newi < len(grid) and 0 <= newj < len(grid):
                         color2 = grid[newi][newj]
                         if color == color2:
-                            break
+                            continue
                         newgrid = copy.deepcopy(grid)
                         for othercolor in colors:
                             if othercolor != color and othercolor != color2:
@@ -51,14 +51,14 @@ def solve(x, n):
     
     def bfs(grid):
         explored = list()
-        q = list()
+        q = co.deque()
         explored.append(grid)
         q.append((grid, 0))
         while q:
-            current_grid, moves = q.pop(0)
-            if solved(current_grid):
+            current_grid, moves = q.popleft()
+            if accept(current_grid):
                 return moves
-            for new_grid in movesfrom(current_grid):
+            for new_grid in options(current_grid):
                 if new_grid not in explored:
                     explored.append(new_grid)
                     q.append((new_grid, moves + 1))
@@ -73,10 +73,12 @@ def solve(x, n):
         allyall = c.most_common()
         return allyall[-1][1]
 
-
-        
-
-    return mbf(grid)
+    if len(grid) > 5:
+        # best guess that will hopefully get some points
+        return mbf(grid)
+    else:
+        # brute force that only works on very small inputs
+        return bfs(grid)
 
 for num, case in enumerate(splitcases(open(fin).read())):
     print(f'Case {num + 1}:')
