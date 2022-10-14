@@ -1,0 +1,8 @@
+(0,1) Forward
+(4,2) Diagonal Up Backward
+(17,1) Forward
+(17,2) Down
+(5,0) Forward
+(15,11) Diagonal Down Backward
+(4,17) Forward
+(15,9) Forward

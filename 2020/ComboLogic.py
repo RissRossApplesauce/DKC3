@@ -8,7 +8,14 @@ def splitcases(x):
     return x.strip('\n').split('\n')
     
 def solve(x, n):
-    pass
+    x = x.split(' ')
+    x = [int(b) for b in x]
+    b = int((not x[0] and x[1]) or (x[2] and x[3]) or (x[4] and not x[5]))
+    def noti(x):
+        if x == 0: return 1
+        return 0
+    i = eval(f'{noti(x[0])}.{x[1]} + {x[2]}.{x[3]} + {x[4]}.{noti(x[5])}')
+    return f'{b} - {i}'
 
 for num, case in enumerate(splitcases(open(fin).read())):
     print(f'Case {num + 1}:')

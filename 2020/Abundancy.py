@@ -8,7 +8,12 @@ def splitcases(x):
     return x.strip('\n').split('\n')
     
 def solve(x, n):
-    pass
+    x = int(x)
+    s = x + 1
+    for i in range(2, x):
+        if math.lcm(i, x) == x:
+            s += i
+    return f'{s / x:.3f}'
 
 for num, case in enumerate(splitcases(open(fin).read())):
     print(f'Case {num + 1}:')

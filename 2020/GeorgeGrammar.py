@@ -8,7 +8,18 @@ def splitcases(x):
     return x.strip('\n').split('\n')
     
 def solve(x, n):
-    pass
+    copyx = x
+    x = list(x)
+    letters = sorted([l for l in x if l.isalpha()])
+    i = 0
+    li = 0
+    while i < len(x):
+        if x[i].isalpha():
+            x[i] = letters[li]
+            li +=1
+        i += 1
+    return copyx + '\n' + ''.join(x)
+
 
 for num, case in enumerate(splitcases(open(fin).read())):
     print(f'Case {num + 1}:')
