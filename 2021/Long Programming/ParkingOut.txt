@@ -1,0 +1,11 @@
+1 parked in 1
+25 parked in 3
+17 parked in 30
+6 parked in 21
+15 did not park
+13 did not park
+*
+7 parked in 7
+8 parked in 8
+1 parked in 9
+*
