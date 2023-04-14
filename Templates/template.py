@@ -6,7 +6,7 @@ open(fout, 'w').close()
 
 def splitcases(x):
     return x.strip('\n').split('\n')
-    
+
 def solve(x, n):
     pass
 
