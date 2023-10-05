@@ -4,8 +4,8 @@ This repo contains most of the practice we did to win the 2022 competition.
 ## Rules and Recent Practice Problems
 https://www.digikey.com/en/resources/edu/dkc3-computing-competition
 
-[!IMPORTANT]
-DigiKey is now using [CodeChef](https://www.codechef.com/) for submitting and grading solutions. The PDFs and solutions here are still relevant, but the templates were made specifically for the old competition format and will be outdated.
+> [!IMPORTANT]
+> DigiKey is now using [CodeChef](https://www.codechef.com/) for submitting and grading solutions. The PDFs and solutions here are still relevant, but the templates were made specifically for the old competition format and will be outdated.
 
 ## Files:
 * Year folders
